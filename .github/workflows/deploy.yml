@@ -1,0 +1,40 @@
+name: Deploy to Cloudflare Pages
+
+# Auto-deploy: every push to main publishes to the kcee-landing-pages
+# Cloudflare Pages project, which the kcee-lp-router Worker proxies to
+# kceeproperties.com/lp/*. Live in about a minute per push.
+#
+# Manual deploy: use the "Run workflow" button on the Actions tab to
+# re-deploy without a code change.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  deployments: write
+
+# One deploy at a time per branch. Do not cancel an in-flight upload --
+# better to queue and deploy the latest version after.
+concurrency:
+  group: pages-deploy-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          # Deploy the whole repo root. Cloudflare Pages auto-excludes
+          # dot-prefixed paths (.git, .github), so workflow files and
+          # git metadata never reach the deploy.
+          command: pages deploy . --project-name=kcee-landing-pages --branch=main
