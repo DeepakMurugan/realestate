@@ -262,17 +262,6 @@
   <!-- <script src="//forms.cdn.sell.do/t/69dc9028e11487515f3e97a9.js"></script> -->
 
 
-  <script src="https://forms.cdn.sell.do/t/forms/69dc9028e11487515f3e97a9/6ac4d963a4dfa00f1da34a07.js"></script>
-
-<script>
-  SellDo.init({
-     srd: "6a0ae856a3d855790618b588",
-
-    target: "#sellDoFormContainer"
-  });
-</script>
-
-
   <!-- SELL.DO THANK YOU PAGE REDIRECTION -->
   <script>
     window.sell_do_form_successfully_submitted = function(data, event) {
@@ -772,7 +761,9 @@ Visit the site to experience the neighborhood's calm atmosphere firsthand. We ar
               id="sellDoFormContainer"
               class="mt-6 sell-do-form-wrap"
               aria-live="polite"
-            ></div>
+            >
+              <script src="//forms.cdn.sell.do/t/forms/69dc9028e11487515f3e97a9/6ac4d963a4dfa00f1da34a07.js" data-form-id="6ac4d963a4dfa00f1da34a07"></script>
+            </div>
 
             <div class="premium-form-inner mt-6 border-t border-line pt-6 text-sm text-textSoft">
               <p class="mb-2">✓ Premium 3BHK Homes</p>
@@ -1008,29 +999,6 @@ Visit the site to experience the neighborhood's calm atmosphere firsthand. We ar
       if (menu) menu.classList.toggle("hidden");
     }
 
-    function loadSellDoFormOnce() {
-      const container = document.getElementById("sellDoFormContainer");
-
-      if (!container || container.dataset.loaded === "true") return;
-
-      container.dataset.loaded = "true";
-
-      // const script = document.createElement("script");
-      // script.src = "//forms.cdn.sell.do/t/forms/69dc9028e11487515f3e97a9/6a0abe6b735dafac03894bec.js";
-      // script.async = true;
-      // script.setAttribute("data-form-id", "6a0abe6b735dafac03894bec");
-
-
-            const script = document.createElement("script");
-      script.src = "//forms.cdn.sell.do/t/forms/69dc9028e11487515f3e97a9/6ac4d963a4dfa00f1da34a07.js";
-      script.async = true;
-      script.setAttribute("data-form-id", "6ac4d963a4dfa00f1da34a07");
-
-
-
-      container.appendChild(script)
-    }
-
     function scrollToForm(event) {
       if (event) event.preventDefault();
 
@@ -1076,7 +1044,6 @@ Visit the site to experience the neighborhood's calm atmosphere firsthand. We ar
       renderIconGrid("greenGrid", green, false);
       renderSpecs();
       initRevealAnimation();
-      loadSellDoFormOnce();
 
       document.querySelectorAll('a[href="#contactForm"], .unlock-price-btn').forEach(link => {
         link.addEventListener("click", scrollToForm);
