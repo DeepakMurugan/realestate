@@ -261,20 +261,38 @@
   <!-- <script src="//forms.cdn.sell.do/t/69dc9028e11487515f3e97a9.js"></script> -->
 
 
-  <script src="https://forms.cdn.sell.do/t/69dc9028e11487515f3e97a9.js"></script>
+  <!-- 1. FIRST: make sure srd is in the URL (must be above the Sell.Do script) -->
+<script>
+  (function () {
+    var DEFAULT_SRD = "6a993de447c7f53a43feee7f";
+    var url = new URL(window.location.href);
+    if (!url.searchParams.get("srd")) {
+      url.searchParams.set("srd", DEFAULT_SRD);
+      window.history.replaceState({}, "", url.toString());
+    }
+  })();
+</script>
+
+<!-- 2. Sell.Do tracking script (keep only this one) -->
+<script src="https://forms.cdn.sell.do/t/69dc9028e11487515f3e97a9.js"></script>
+
+  
+
+
+  <!-- <script src="https://forms.cdn.sell.do/t/69dc9028e11487515f3e97a9.js"></script> -->
 
   <!-- <script src='//forms.cdn.sell.do/t/forms/69dc9028e11487515f3e97a9/6a0abe6b735dafac03894bec.js' data-form-id='6a0abe6b735dafac03894bec'></script> -->
 
 
   
 
-<script>
+<!-- <script>
   SellDo.init({
      srd: "6a993de447c7f53a43feee7f",
 
     target: "#sellDoFormContainer"
   });
-</script>
+</script> -->
   
 
 
@@ -950,6 +968,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       if (menu) menu.classList.toggle("hidden");
     }
 
+
+    
+
     function loadSellDoFormOnce() {
       const container = document.getElementById("sellDoFormContainer");
 
@@ -957,14 +978,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       container.dataset.loaded = "true";
 
-      // const script = document.createElement("script");
-      // script.src = "//forms.cdn.sell.do/t/forms/69dc9028e11487515f3e97a9/6a0abe6b735dafac03894bec.js";
-      // script.async = true;
-      // script.setAttribute("data-form-id", "6a0abe6b735dafac03894bec");
+  
 
 
             const script = document.createElement("script");
-      script.src = "//forms.cdn.sell.do/t/forms/69dc9028e11487515f3e97a9/6a0abe6b735dafac03894bec.js";
+script.src = "https://forms.cdn.sell.do/t/forms/69dc9028e11487515f3e97a9/6a0abe6b735dafac03894bec.js";
       script.async = true;
       script.setAttribute("data-form-id", "6a0abe6b735dafac03894bec");
 
@@ -974,6 +992,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       
     }
+
+
+
+
+    
 
     function scrollToForm(event) {
       if (event) event.preventDefault();
